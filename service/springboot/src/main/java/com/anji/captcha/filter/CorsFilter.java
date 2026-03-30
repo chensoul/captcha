@@ -4,18 +4,20 @@
  *http://www.anji-plus.com
  *All rights reserved.
  */
-package com.anji.captcha.demo.filter;
+package com.anji.captcha.filter;
 /**
  * 本地启动解决跨域问题
- *  打包发布请注释该类，可能会造成一定的影响，解决本地启动跨域问题
+ * 打包发布请注释该类，可能会造成一定的影响，解决本地启动跨域问题
  * Created by raodeming on 2020/3/17.
  */
+
+import jakarta.servlet.*;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 @WebFilter(filterName = "CorsFilter ")
@@ -27,7 +29,7 @@ public class CorsFilter implements Filter {
     }
 
     @Override
-    public  void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws ServletException, IOException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;

@@ -1,22 +1,18 @@
 package com.anji.captcha.service.test;
 
-import com.anji.captcha.demo.StartApplication;
+import com.anji.captcha.StartApplication;
 import com.anji.captcha.model.common.CaptchaTypeEnum;
 import com.anji.captcha.model.common.ResponseModel;
 import com.anji.captcha.model.vo.CaptchaVO;
 import com.anji.captcha.service.CaptchaService;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.InputStream;
-import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +29,6 @@ import java.util.concurrent.TimeUnit;
  * @author WongBin
  * @date 2021/1/21
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = StartApplication.class)
 public class FrequencyLimitTest {
 
@@ -42,9 +37,9 @@ public class FrequencyLimitTest {
     private CaptchaVO req = new CaptchaVO();
     private Logger logger = LoggerFactory.getLogger(getClass());
     int cnt = 100;
-    private String clientUid = "login-"+UUID.randomUUID().toString();
+    private String clientUid = "login-" + UUID.randomUUID().toString();
 
-    @Before
+    @BeforeEach
     public void init() {
         req.setCaptchaType(CaptchaTypeEnum.BLOCKPUZZLE.getCodeValue());
         //req.setClientUid(clientUid);
@@ -84,7 +79,7 @@ public class FrequencyLimitTest {
     public void testCheck() throws Exception {
         int i = 0;
         while (i++ < cnt) {
-            req.setToken("xddfdf"+i);
+            req.setToken("xddfdf" + i);
             ResponseModel res = captchaService.check(req);
             logger.info(i + "=" + res.getRepCode() + "," + res.getRepMsg());
             TimeUnit.SECONDS.sleep(1);
@@ -95,7 +90,7 @@ public class FrequencyLimitTest {
     public void testVerify() throws Exception {
         int i = 0;
         while (i++ < cnt) {
-            req.setToken("xddfdf"+i);
+            req.setToken("xddfdf" + i);
             req.setCaptchaVerification("sdfddfdd");
             ResponseModel res = captchaService.verification(req);
             logger.info(i + "=" + res.getRepCode() + "," + res.getRepMsg());

@@ -1,4 +1,4 @@
-package com.anji.captcha.demo.service;
+package com.anji.captcha.service;
 
 import com.anji.captcha.service.CaptchaCacheService;
 import org.springframework.data.redis.core.StringRedisTemplate;

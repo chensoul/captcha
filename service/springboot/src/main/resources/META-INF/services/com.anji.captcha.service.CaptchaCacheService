@@ -1,1 +1,1 @@
-com.anji.captcha.demo.service.CaptchaCacheServiceRedisImpl
+com.anji.captcha.service.CaptchaCacheServiceRedisImpl

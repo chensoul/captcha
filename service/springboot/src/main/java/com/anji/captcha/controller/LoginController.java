@@ -1,4 +1,4 @@
-package com.anji.captcha.demo.controller;
+package com.anji.captcha.controller;
 
 import com.anji.captcha.model.common.ResponseModel;
 import com.anji.captcha.model.vo.CaptchaVO;

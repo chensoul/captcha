@@ -6,17 +6,15 @@ import java.util.List;
 import java.util.Set;
 
 import com.alibaba.fastjson.JSONObject;
-import com.anji.captcha.demo.StartApplication;
+import com.anji.captcha.StartApplication;
 import com.anji.captcha.model.common.ResponseModel;
 import com.anji.captcha.model.vo.CaptchaVO;
 import com.anji.captcha.service.CaptchaCacheService;
 import com.anji.captcha.service.CaptchaService;
 import com.anji.captcha.service.impl.ClickWordCaptchaServiceImpl;
-import com.anji.captcha.util.AESUtil;
 import com.anji.captcha.util.RandomUtils;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,7 +22,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 /**
  * Created by raodeming on 2020/4/30.
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = StartApplication.class)
 public class CaptchaServiceImplTest {
 
@@ -32,6 +29,7 @@ public class CaptchaServiceImplTest {
     private CaptchaService captchaService;
     @Autowired
     private CaptchaCacheService cacheService;
+
     @Test
     public void get() {
         CaptchaVO captchaVO = new CaptchaVO();
@@ -44,28 +42,28 @@ public class CaptchaServiceImplTest {
     }
 
     @Test
-    public void testRandom(){
+    public void testRandom() {
         int t = 10000;
         int wordCount = 4;
         List<Set> ret = new ArrayList();
-        for(int i=0;i<t;i++) {
+        for (int i = 0; i < t; i++) {
             Set s = getRandomWords(wordCount);
             //assert s.size()==wordCount;
             ret.add(s);
         }
         List<Set> ret1 = new ArrayList();
-        for(int i=0;i<t;i++) {
+        for (int i = 0; i < t; i++) {
             Set s = getRandomWords1(wordCount);
             //assert s.size()==wordCount;
             ret1.add(s);
         }
-        System.out.println(ret.stream().filter(i->i.size()==wordCount).count());
-        System.out.println(ret1.stream().filter(i->i.size()==wordCount).count());
-        assert ret1.stream().filter(i->i.size()==wordCount).count() == t;
+        System.out.println(ret.stream().filter(i -> i.size() == wordCount).count());
+        System.out.println(ret1.stream().filter(i -> i.size() == wordCount).count());
+        assert ret1.stream().filter(i -> i.size() == wordCount).count() == t;
     }
 
     private Set<String> getRandomWords(int wordCount) {
-        Set<String> currentWords  = new HashSet<>();
+        Set<String> currentWords = new HashSet<>();
         for (int i = 0; i < wordCount; i++) {
             String word;
             do {
@@ -90,7 +88,7 @@ public class CaptchaServiceImplTest {
     }
 
     @Test
-    public void test(){
+    public void test() {
         Long increment = cacheService.increment("11", 2);
 
     }
